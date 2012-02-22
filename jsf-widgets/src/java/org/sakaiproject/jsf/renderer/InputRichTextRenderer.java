@@ -205,8 +205,7 @@ public class InputRichTextRenderer extends Renderer
 
 	ServerConfigurationService serverConfigurationService = (ServerConfigurationService)ComponentManager.get(ServerConfigurationService.class.getName());
     String editor = serverConfigurationService.getString("wysiwyg.editor");
-    
-    
+      
     writer.write("<table border=\"0\"><tr><td>");
     writer.write("<textarea name=\"" + clientId + "_inputRichText\" id=\"" + clientId + "_inputRichText\"");
     if (textareaColumns > 0) writer.write(" cols=\""+textareaColumns+"\"");
@@ -216,9 +215,14 @@ public class InputRichTextRenderer extends Renderer
        writer.write((String) value);
     writer.write("</textarea>");
     
-    if (!"true".equals(textareaOnly))
-    {
-    writer.write("<script type=\"text/javascript\">sakai.editor.launch('" + clientId + "_inputRichText', '', '" + widthPx + "','" + heightPx + "');</script>");
+    if (!"true".equals(textareaOnly)) {
+    	String toolbarScript;
+    	if (buttonList != null) {
+    		toolbarScript = makeToolbarScript(buttonList);
+    	} else {
+    		toolbarScript = getStandardToolbarScript(buttonSet);
+    	}
+    	writer.write("<script type=\"text/javascript\">sakai.editor.launch('"+clientId+"_inputRichText', '', '"+widthPx+"','"+heightPx+"','"+toolbarScript+"');</script>");
     }
 
     writer.write("</td></tr></table>\n");
@@ -384,7 +388,8 @@ public class InputRichTextRenderer extends Renderer
     }
     else
     {
-      toolbarScript = TOOLBAR_SCRIPT_MEDIUM;
+      //toolbarScript = TOOLBAR_SCRIPT_MEDIUM;
+      toolbarScript = buttonSet;
     }
 
     return toolbarScript;
