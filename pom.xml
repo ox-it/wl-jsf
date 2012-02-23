@@ -35,8 +35,8 @@
     </modules>
 
     <scm>
-        <connection>scm:git:git://git-repo.oucs.ox.ac.uk/git/repos/local-version/jsf.git</connection>
-        <developerConnection>scm:git:ssh://git-repo.oucs.ox.ac.uk/~git/repos/local-version/jsf.git</developerConnection>
+        <connection>scm:git:git://git-repo.oucs.ox.ac.uk/git/repos/local-version/sakai/jsf.git</connection>
+        <developerConnection>scm:git:ssh://git-repo.oucs.ox.ac.uk/~git/repos/local-version/sakai/jsf.git</developerConnection>
     </scm>
     
     <distributionManagement>
