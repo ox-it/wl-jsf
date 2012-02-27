@@ -216,13 +216,19 @@ public class InputRichTextRenderer extends Renderer
     writer.write("</textarea>");
     
     if (!"true".equals(textareaOnly)) {
-    	String toolbarScript;
+    	String toolbarScript = null;
     	if (buttonList != null) {
     		toolbarScript = makeToolbarScript(buttonList);
-    	} else {
+    	} 
+    	if (buttonSet != null) {
     		toolbarScript = getStandardToolbarScript(buttonSet);
     	}
-    	writer.write("<script type=\"text/javascript\">sakai.editor.launch('"+clientId+"_inputRichText', '', '"+widthPx+"','"+heightPx+"','"+toolbarScript+"');</script>");
+    	if (toolbarScript != null) {
+    		writer.write("<script type=\"text/javascript\">sakai.editor.launch('"+clientId+"_inputRichText', '', '"+widthPx+"','"+heightPx+"','"+toolbarScript+"');</script>");
+    	} else {
+    		writer.write("<script type=\"text/javascript\">sakai.editor.launch('"+clientId+"_inputRichText', '', '"+widthPx+"','"+heightPx+"');</script>");
+        	
+    	}
     }
 
     writer.write("</td></tr></table>\n");
